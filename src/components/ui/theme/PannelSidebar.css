@@ -1,0 +1,35 @@
+/* Sidebar.css */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px; /* تغییر از left به right */
+    width: 240px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    transition: right 0.3s ease; /* تغییر از left به right */
+    padding-top: 60px;
+  }
+  .sidebar.open {
+    right: 0; /* تغییر از left به right */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px 20px;
+    text-align: right;
+  }
+  
+  .sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #575757;
+  }
+  

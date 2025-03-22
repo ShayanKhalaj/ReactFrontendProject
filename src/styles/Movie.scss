@@ -1,0 +1,28 @@
+.moviecontainer {
+  position: absolute;
+  width: 100vw;
+    top: 40px; /* فاصله مناسب از بالای صفحه */
+  }
+  
+  .movierow {
+    margin-top: 30px; /* فاصله مناسب بین ستون‌ها */
+  }
+  
+  .moviecol {
+    margin-bottom: 30px; /* فاصله از پایین برای هر ستون */
+  }
+  
+  .movieDescriptionBox {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .playBox {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  

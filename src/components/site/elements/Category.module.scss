@@ -1,0 +1,90 @@
+.categoryContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 15vh auto 0; /* افزایش فاصله از بالا برای پایین‌تر رفتن از نوبار */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    padding: 20px;
+  
+    h2 {
+      width: 100%;
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: white; /* عنوان سفید */
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    }
+  
+    .categoryItem {
+      position: relative;
+      width: 30%;
+      min-width: 280px;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, filter 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.4); /* پس‌زمینه تیره */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* سایه کوچک */
+  
+      &:hover {
+        transform: scale(1.08); /* بزرگ شدن آیتم */
+        box-shadow: 0 12px 20px rgba(0, 255, 255, 0.5); /* سایه بزرگتر */
+      }
+  
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease-in-out, filter 0.3s ease-in-out;
+      }
+  
+      &:hover img {
+        transform: scale(1.1); /* بزرگ شدن تصویر */
+        filter: blur(2px); /* فوکوس روی تصویر */
+      }
+  
+      .categoryTitle {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: #ffffff;
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-align: center;
+        transition: background 0.4s ease, transform 0.3s ease;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  
+        &:hover {
+          background: rgba(0, 255, 255, 0.9);
+          transform: translateX(-50%) scale(1.05);
+        }
+      }
+    }
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+  
+      .categoryItem {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px; /* فاصله بیشتر در موبایل */
+      }
+    }
+  }
+  

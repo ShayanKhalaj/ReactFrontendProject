@@ -1,0 +1,21 @@
+.container {
+    width: 100vw; /* کل عرض صفحه */
+    height: 110vh; /* ارتفاع خودکار با توجه به عرض */
+    display: flex; /* برای استفاده از ویژگی‌های فیت */
+    justify-content: center; /* تراز کردن تصویر در وسط */
+    overflow: hidden; /* جلوگیری از بیرون زدن تصویر از محدوده */
+    box-sizing: border-box;
+    /* اضافه کردن اثر شیشه‌ای */
+    background: rgba(0, 0, 0, 0.3); /* پس‌زمینه شفاف */
+    backdrop-filter: blur(10px); /* محو کردن پس‌زمینه */
+    border-radius: 10px; /* گوشه‌های گرد */
+    padding: 20px; /* فاصله از لبه‌ها */
+  }
+  
+  .image {
+    width: 100%; /* فیت شدن تصویر با عرض */
+    height: auto; /* حفظ تناسب تصویر */
+    object-fit: cover; /* پوشش کامل تصویر */
+    border-radius: 8px; /* گوشه‌های گرد برای تصویر */
+  }
+  

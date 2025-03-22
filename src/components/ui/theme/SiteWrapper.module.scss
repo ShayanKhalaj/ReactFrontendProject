@@ -1,0 +1,25 @@
+.themeWrapper {
+  width: 100%;
+  min-height: 100vh; /* پوشش کامل صفحه */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+
+  /* پس‌زمینه با افکت گرادینت و شفافیت */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(8, 8, 8, 0.95));
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 50px rgba(0, 225, 255, 0.1);
+
+  /* انیمیشن تغییر حالت برای تجربه کاربری بهتر */
+  transition: background 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+
+  /* ریسپانسیو برای موبایل */
+  @media (max-width: 768px) {
+    backdrop-filter: blur(6px);
+    box-shadow: inset 0 0 30px rgba(0, 225, 255, 0.1);
+  }
+}
