@@ -68,4 +68,4 @@ function CategoryGrid() {
   );
 }
 
-export default CategoryGrid;
+export default React.memo(CategoryGrid);

@@ -18,7 +18,9 @@ function MovieManagment({ MovieSearchList,GenreList,DirectorList,CategoryList,Ac
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(SearchMovieService(MovieSearchList.data))
+    if(MovieSearchList?.data){
+      dispatch(SearchMovieService(MovieSearchList.data))
+    }
   }, [dispatch])
 
   return (
@@ -40,17 +42,17 @@ function MovieManagment({ MovieSearchList,GenreList,DirectorList,CategoryList,Ac
 }
 
 export async function getServerSideProps(context) {
-    //  const cookies = cookie.parse(context.req.headers.cookie || "");
-    //   const token = cookies.token;
+      const cookies = cookie.parse(context.req.headers.cookie || "");
+      const token = cookies.token;
   
-    //   if(!token){
-    //       return{
-    //           redirect: {
-    //               destination: "/auth/login",
-    //               permanent: false,
-    //             },
-    //       }
-    //   }
+      if(!token){
+          return{
+              redirect: {
+                  destination: "/auth/login",
+                  permanent: false,
+                },
+          }
+      }
   const MovieSearchResponse = await SearchMovieRepository(SearchMovieDto)
   const GenreList = await GetAllGenreRepository()
   const DirectorList = await GetAllDirectorRepository()
@@ -59,11 +61,11 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      MovieSearchList: MovieSearchResponse.data,
-      GenreList:GenreList.data,
-      DirectorList:DirectorList.data,
-      CategoryList:CategoryList.data,
-      ActorList:GetAllActorList.data || []
+      MovieSearchList: MovieSearchResponse?.data||{},
+      GenreList:GenreList?.data||{},
+      DirectorList:DirectorList?.data||{},
+      CategoryList:CategoryList?.data||{},
+      ActorList:GetAllActorList?.data || []
     }
   }
 }

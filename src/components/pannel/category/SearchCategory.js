@@ -33,15 +33,15 @@ function SearchCategory({categories}) {
       {(isSubmitting) => {
         return (
           <Form>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label className="form-label">انتخاب دسته بندی</label>
               <Field className="form-select" as='select' name="categoryId" >
                 <option value="">...انتخاب کنید...</option>
-                {categories!==null?categories.data.map((item)=>{
+                {categories.data.length!==0?categories.data.map((item)=>{
                     return <option key={item.categoryId} value={item.categoryId}>{item.categoryPersianName}</option>
                 }):<></>}
               </Field>
-            </div>
+            </div> */}
 
             <div className="form-group">
               <label className="form-label">نام فارسی</label>

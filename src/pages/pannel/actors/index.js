@@ -11,9 +11,12 @@ import ThemeWrapper from '@/components/ui/theme/ThemeWrapper';
 
 function ActorManagement({ ActorSearchList }) {
 
+    console.log(ActorSearchList)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(SearchActorService(ActorSearchList.data))
+        if(ActorSearchList?.data){
+            dispatch(SearchActorService(ActorSearchList.data))
+        }
     }, [dispatch])
 
 
@@ -36,24 +39,24 @@ function ActorManagement({ ActorSearchList }) {
 }
 
 export async function getServerSideProps(context) {
-    // const cookies = cookie.parse(context.req.headers.cookie || "");
-    // const token = cookies.token;
+    const cookies = cookie.parse(context.req.headers.cookie || "");
+    const token = cookies.token;
 
-    // if(!token){
-    //     return{
-    //         redirect: {
-    //             destination: "/auth/login",
-    //             permanent: false,
-    //           },
-    //     }
-    // }
+    if(!token){
+        return{
+            redirect: {
+                destination: "/auth/login",
+                permanent: false,
+              },
+        }
+    }
 
     const ActorSearchResponse = await SearchActorRepository(SearchActorDto,{
-
+        headers: { Authorization: `Bearer ${token}` }, // ارسال توکن
     })
     return {
         props: {
-            ActorSearchList: ActorSearchResponse.data,
+            ActorSearchList: ActorSearchResponse?.data||{},
         }
     }
 }

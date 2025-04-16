@@ -13,7 +13,7 @@ import ThemeWrapper from '@/components/ui/theme/ThemeWrapper';
 function DirectorManagement({ DirectorSearchList }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    if(DirectorSearchList.data){
+    if(DirectorSearchList?.data){
         dispatch(SearchDirectorService(DirectorSearchList.data));
     }
   }, [dispatch]);
@@ -37,28 +37,27 @@ function DirectorManagement({ DirectorSearchList }) {
 }
 
 export async function getServerSideProps(context) {
-  // const cookies = cookie.parse(context.req.headers.cookie || "");
-  // const token = cookies.token;
+  const cookies = cookie.parse(context.req.headers.cookie || "");
+  const token = cookies.token;
 
-  // if (!token) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
 
   const DirectorSearchResponse = await SearchDirectorRepository(
     SearchDirectorDto,
 
   );
-console.log(DirectorSearchResponse)
 
   // اطمینان از اینکه CategorySearchResponse.data موجود است
   return {
     props: {
-        DirectorSearchList: DirectorSearchResponse.data || null,
+        DirectorSearchList: DirectorSearchResponse?.data || {},
     },
   };
 }

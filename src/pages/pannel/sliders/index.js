@@ -16,7 +16,9 @@ function SliderManagment({SliderearchList,CategoryList,MoviesList}) {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    dispatch(SearchSliderService(SliderearchList.data))
+    if(SliderearchList.data){
+      dispatch(SearchSliderService(SliderearchList.data))
+    }
   },[dispatch])
 
   return (
@@ -39,17 +41,17 @@ function SliderManagment({SliderearchList,CategoryList,MoviesList}) {
 }
 
 export async function getServerSideProps(context) {
-    //  const cookies = cookie.parse(context.req.headers.cookie || "");
-    //   const token = cookies.token;
+     const cookies = cookie.parse(context.req.headers.cookie || "");
+      const token = cookies.token;
   
-    //   if(!token){
-    //       return{
-    //           redirect: {
-    //               destination: "/auth/login",
-    //               permanent: false,
-    //             },
-    //       }
-    //   }
+      if(!token){
+          return{
+              redirect: {
+                  destination: "/auth/login",
+                  permanent: false,
+                },
+          }
+      }
   const SliderSearchResponse = await SearchSliderRepository(SearchActorDto)
 
   const CategoryList = await GetAllCategoryRepository()
@@ -58,9 +60,9 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      SliderearchList: SliderSearchResponse.data,
-      CategoryList:CategoryList.data,
-      MoviesList:MoviesList.data||[]
+      SliderearchList: SliderSearchResponse?.data||{},
+      CategoryList:CategoryList?.data||{},
+      MoviesList:MoviesList?.data||[]
     }
   }
 }

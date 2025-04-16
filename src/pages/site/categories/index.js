@@ -13,12 +13,12 @@ function Categories({categories}) {
     <SiteNavbar/>
     <Container>
         <Row>
-            {categories.map((item,index)=>{
+            {categories.length?categories.map((item,index)=>{
                
            return <Col key={item.cateoryId} md={3} sm={12} xs={12}>
             <Category category={item}/>
         </Col> 
-            })}
+            }):<></>}
         </Row>
     </Container>
     </SiteWrapper>
@@ -28,12 +28,22 @@ function Categories({categories}) {
 }
 
 export async function getStaticProps(params) {
-    const categories = await axios.get('http://localhost:5090/site/categories/get')
-    return {
-        props:{
-            categories:categories.data
-        }
+    try {
+        const response = await axios.get('http://localhost:5090/site/categories/get');
+        return {
+            props: {
+                categories: response.data || [],
+            },
+        };
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        return {
+            props: {
+                categories: [],
+            },
+        };
     }
 }
+
 
 export default Categories

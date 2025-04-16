@@ -10,7 +10,7 @@ import directorReducer from "@/redux/features/pannel/DirectorSlice";
 import genreReducer from "@/redux/features/pannel/GenreSlice";
 import movieReducer from "@/redux/features/pannel/MovieSlice";
 import sliderReducer from "@/redux/features/pannel/SliderSlice";
-import adminReducer from '@/redux/auth/AdminSlice';
+import userReducer from '@/redux/auth/UserSlice';
 
 export const Store = configureStore({
   reducer:{
@@ -21,39 +21,39 @@ export const Store = configureStore({
     genres: genreReducer,
     movies: movieReducer,
     sliders: sliderReducer,
-    admin:adminReducer
+    user:userReducer
   }
 })
 
-// // تنظیمات Persist برای ذخیره در localStorage
-// const localStorageConfiguration = {
-//   key: "global-storage",
-//   storage: localStorage,
-// };
+// تنظیمات Persist برای ذخیره در localStorage
+const localStorageConfiguration = {
+  key: "global-storage",
+  storage: localStorage,
+};
 
-// // ترکیب همه Reducer‌ها
-// const rootReducer = combineReducers({
-//   actors: actorReducer,
-//   boxes: boxReducer,
-//   categories: categoryReducer,
-//   directors: directorReducer,
-//   genres: genreReducer,
-//   movies: movieReducer,
-//   sliders: sliderReducer,
-//   admin:adminReducer
-// });
+// ترکیب همه Reducer‌ها
+const rootReducer = combineReducers({
+  // actors: actorReducer,
+  // boxes: boxReducer,
+  // categories: categoryReducer,
+  // directors: directorReducer,
+  // genres: genreReducer,
+  // movies: movieReducer,
+  // sliders: sliderReducer,
+  user:userReducer
+});
 
-// // اضافه کردن Persist به Root Reducer
-// const persistedReducer = persistReducer(localStorageConfiguration, rootReducer);
+// اضافه کردن Persist به Root Reducer
+const persistedReducer = persistReducer(localStorageConfiguration, rootReducer);
 
-// // پیکربندی Store
-// export const Store = configureStore({
-//   reducer: persistedReducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: false, // غیرفعال کردن چک‌های سریالی
-//     }),
-// });
+// پیکربندی Store
+export const Store2 = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // غیرفعال کردن چک‌های سریالی
+    }),
+});
 
-// // ایجاد Persistor برای کنترل Persist Store
-// export const persistor = persistStore(Store);
+// ایجاد Persistor برای کنترل Persist Store
+export const persistor = persistStore(Store2);

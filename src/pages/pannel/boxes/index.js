@@ -19,7 +19,9 @@ function BoxManagment({ BoxSearchList, CategoryList, MoviesList }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(SearchBoxService(BoxSearchList.data));
+    if(BoxSearchList?.data){
+      dispatch(SearchBoxService(BoxSearchList.data));
+    }
   }, [dispatch]);
 
   return (
@@ -41,17 +43,17 @@ function BoxManagment({ BoxSearchList, CategoryList, MoviesList }) {
 }
 
 export async function getServerSideProps(context) {
-  // const cookies = cookie.parse(context.req.headers.cookie || "");
-  // const token = cookies.token;
+  const cookies = cookie.parse(context.req.headers.cookie || "");
+  const token = cookies.token;
 
-  // if (!token) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
   const SliderSearchResponse = await SearchBoxRepository(SearchBoxDto);
 
   const CategoryList = await GetAllCategoryRepository();
@@ -59,9 +61,9 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      BoxSearchList: SliderSearchResponse.data,
-      CategoryList: CategoryList.data,
-      MoviesList: MoviesList.data || [],
+      BoxSearchList: SliderSearchResponse?.data||{},
+      CategoryList: CategoryList?.data||{},
+      MoviesList: MoviesList?.data || [],
     },
   };
 }
